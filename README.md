@@ -15,15 +15,15 @@ You need Node 20 or newer and a Postgres 15+ database.
 
 ```bash
 npm install
-cp .env.example .env          # then edit DATABASE_URL and AUTH_SECRET
+cp .env.example .env          # the defaults work with the compose file below
 docker compose up -d          # or point DATABASE_URL at your own Postgres
 npm run db:setup              # creates the tables, constraints, views and demo data
 npm run dev
 ```
 
 The default `DATABASE_URL` in `.env.example` matches the Postgres the compose
-file starts, so if you use it you only need to set `AUTH_SECRET`. If you have
-your own Postgres, skip the compose step and point `DATABASE_URL` at it.
+file starts, so if you use it there is nothing to edit. If you have your own
+Postgres, skip the compose step and point `DATABASE_URL` at it instead.
 
 Open http://localhost:3000 and sign in.
 
@@ -54,7 +54,6 @@ the orange **Snap** button for receipts.
 | Variable | Default | What it does |
 |---|---|---|
 | `DATABASE_URL` | — | Postgres connection string. Required. |
-| `AUTH_SECRET` | — | 32+ random bytes. `openssl rand -base64 48`. Required. |
 | `AUTH_SESSION_DAYS` | `30` | How long a login lasts before you have to sign in again. |
 | `STORAGE_DRIVER` | `local` | `local` writes to disk (development). `supabase` uses Supabase Storage (production). |
 | `STORAGE_LOCAL_DIR` | `./public/uploads` | Where the local driver puts files. |
