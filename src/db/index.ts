@@ -1,13 +1,9 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import * as schema from "./schema";
+import { databaseUrl } from "@/lib/db-url";
 
-const connectionString = process.env.DATABASE_URL;
-if (!connectionString) {
-  throw new Error(
-    "DATABASE_URL is not set. Copy .env.example to .env and point it at your Postgres database.",
-  );
-}
+const connectionString = databaseUrl();
 
 /**
  * One pool per process. Next dev reloads modules on every edit, so the client

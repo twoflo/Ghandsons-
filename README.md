@@ -15,15 +15,25 @@ You need Node 20 or newer and a Postgres 15+ database.
 
 ```bash
 npm install
-cp .env.example .env          # the defaults work with the compose file below
-docker compose up -d          # or point DATABASE_URL at your own Postgres
+cp .env.example .env
 npm run db:setup              # creates the tables, constraints, views and demo data
 npm run dev
 ```
 
-The default `DATABASE_URL` in `.env.example` matches the Postgres the compose
-file starts, so if you use it there is nothing to edit. If you have your own
-Postgres, skip the compose step and point `DATABASE_URL` at it instead.
+For the database, either:
+
+- **Docker** — `docker compose up -d` before `db:setup`. The `DATABASE_URL`
+  already in `.env.example` matches it, so there is nothing to edit.
+- **A hosted Postgres** (Neon, Supabase, anything) — paste its connection
+  string over `DATABASE_URL` in `.env`. No local install. Provider-specific
+  query parameters that the driver can't use, such as Neon's
+  `channel_binding`, are stripped automatically; `sslmode` is respected.
+- **Postgres already on your machine** — point `DATABASE_URL` at it and make
+  sure the database named in the URL exists.
+
+The setup needs permission to `CREATE EXTENSION pg_trgm` (used for fuzzy
+supplier matching on receipts). Neon, Supabase and a local superuser all allow
+this; a locked-down managed instance may not.
 
 Open http://localhost:3000 and sign in.
 

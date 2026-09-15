@@ -1,9 +1,10 @@
 import { config as loadEnv } from "../../lib/env-file";
+import { databaseUrl } from "../../lib/db-url";
 loadEnv();
 
 const { default: postgres } = await import("postgres");
 
-const sql = postgres(process.env.DATABASE_URL!, { max: 1, prepare: false });
+const sql = postgres(databaseUrl(), { max: 1, prepare: false });
 
 console.log("Dropping and recreating the public schema…");
 await sql.unsafe(`
