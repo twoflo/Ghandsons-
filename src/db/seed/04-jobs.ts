@@ -225,6 +225,7 @@ type QuoteSpec = {
   job?: string;
   status: "draft" | "sent" | "accepted" | "rejected" | "expired";
   issued: number;
+  /** Days the price holds from the issue date. */
   valid: number;
   markupBp: number;
   scope: string;
@@ -238,7 +239,7 @@ const QUOTE_SPECS: QuoteSpec[] = [
   {
     key: "osborne", number: "Q-1086", title: "Main bathroom renovation — 62 Sandringham St",
     client: "osborne", site: "Home — Camp Hill", job: "osborne_bath",
-    status: "sent", issued: -5, valid: 25, markupBp: 2200,
+    status: "sent", issued: -5, valid: 30, markupBp: 2200,
     scope:
       "Strip out the existing bathroom back to studs and slab. Rectify any rot found in the floor framing (provisional sum). New waterproofing to AS 3740, floor and wall tiling, walk-in shower with a linear drain, wall hung vanity, back-to-wall toilet suite, heated towel rail, exhaust fan and new lighting.",
     exclusions:
@@ -260,7 +261,7 @@ const QUOTE_SPECS: QuoteSpec[] = [
   {
     key: "cpg_u7", number: "Q-1087", title: "Unit 7 kitchen replacement — Marlow Court",
     client: "cpg", site: "Marlow Court — Unit 7", job: "cpg_u7",
-    status: "sent", issued: -2, valid: 28, markupBp: 1800,
+    status: "sent", issued: -2, valid: 30, markupBp: 1800,
     scope:
       "Remove the existing kitchen and dispose. Supply and install new flat pack carcasses in the same footprint, laminate benchtop with a post-formed edge, new stainless sink and mixer, and reconnect the existing appliances. Make good and paint the affected wall surfaces.",
     lines: [
@@ -278,7 +279,7 @@ const QUOTE_SPECS: QuoteSpec[] = [
   {
     key: "nguyen", number: "Q-1081", title: "Two bedroom granny flat — 7 Bellevue Ave",
     client: "nguyen", site: "Home — Stafford", job: "nguyen_flat",
-    status: "accepted", issued: -26, valid: 4, markupBp: 1800,
+    status: "accepted", issued: -26, valid: 30, markupBp: 1800,
     accepted: { at: -4, by: "Hien Nguyen" },
     scope:
       "Detached 58m2 secondary dwelling: two bedrooms, bathroom, open plan kitchen and living, and a small covered deck. Slab on ground, timber frame, colorbond roof. Includes connection to the existing services and the council application.",
@@ -306,7 +307,7 @@ const QUOTE_SPECS: QuoteSpec[] = [
   {
     key: "dental", number: "Q-1078", title: "Reception & waiting room fitout",
     client: "dental", site: "Surgery — Holland Park", job: "dental_fitout",
-    status: "accepted", issued: -34, valid: -4, markupBp: 1500,
+    status: "accepted", issued: -34, valid: 30, markupBp: 1500,
     accepted: { at: -14, by: "Dr Anita Sharma" },
     scope:
       "Strip out the existing reception counter and waiting room finishes. Install new custom reception joinery, suspended ceiling with LED panel lighting, commercial vinyl flooring, and repaint. All works between 5pm Friday and 7am Tuesday of the October long weekend.",
@@ -326,7 +327,7 @@ const QUOTE_SPECS: QuoteSpec[] = [
   {
     key: "raman_fence", number: "Q-1074", title: "Front fence & automated gate",
     client: "raman", site: "Home — Paddington", job: "raman_fence",
-    status: "rejected", issued: -46, valid: -16, markupBp: 2500,
+    status: "rejected", issued: -46, valid: 30, markupBp: 2500,
     rejected: { at: -14, reason: "Went with a fencing specialist, roughly 20% cheaper." },
     scope: "Hardwood picket fence to the street boundary with an automated sliding gate and intercom.",
     lines: [
@@ -357,7 +358,7 @@ const QUOTE_SPECS: QuoteSpec[] = [
   {
     key: "kilby_ext", number: "Q-1069", title: "Two-storey rear extension — 31 Waterworks Rd",
     client: "kilby", site: "Home — Ashgrove", job: "kilby_ext",
-    status: "accepted", issued: -64, valid: -34, markupBp: 1800,
+    status: "accepted", issued: -64, valid: 45, markupBp: 1800,
     accepted: { at: -46, by: "Megan Kilby" },
     scope:
       "Two-storey rear extension: 42m2 ground floor living and dining, 46m2 first floor with two bedrooms and a bathroom. New 6m LVL portal to the existing rear wall, piered footings to the fall of the site, colorbond roof to match.",
