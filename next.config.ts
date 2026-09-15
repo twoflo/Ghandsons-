@@ -5,7 +5,6 @@ const config: NextConfig = {
   experimental: {
     serverActions: { bodySizeLimit: "12mb" },
   },
-  eslint: { ignoreDuringBuilds: true },
 };
 
 export default config;

@@ -73,13 +73,19 @@ export function LinkButton({
 export function Card({
   children,
   className,
+  id,
   as: Component = "div",
 }: {
   children: ReactNode;
   className?: string;
+  id?: string;
   as?: "div" | "section" | "article" | "li";
 }) {
-  return <Component className={clsx("card", className)}>{children}</Component>;
+  return (
+    <Component id={id} className={clsx("card", className)}>
+      {children}
+    </Component>
+  );
 }
 
 export function CardHeader({

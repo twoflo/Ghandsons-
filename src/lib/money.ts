@@ -63,11 +63,22 @@ export function formatMoney(cents: number | null | undefined): string {
   return AUD.format((cents ?? 0) / 100);
 }
 
-/** 123456 -> "$1,235". For dashboard tiles where the cents are noise. */
+/**
+ * Rounded, for dashboard tiles where the cents are noise.
+ *   123456      -> "$1,235"
+ *   18_262_600  -> "$182.6k"
+ *   32_850_000_0 -> "$3.3m"
+ */
 export function formatMoneyShort(cents: number | null | undefined): string {
   const v = cents ?? 0;
-  if (Math.abs(v) >= 100_000_00) return `$${(v / 100_000_0).toFixed(1).replace(/\.0$/, "")}m`;
+  const abs = Math.abs(v);
+  if (abs >= 100_000_000) return `$${trim(v / 100_000_000)}m`;   // >= $1,000,000
+  if (abs >= 1_000_000) return `$${trim(v / 100_000)}k`;         // >= $10,000
   return AUD_WHOLE.format(v / 100);
+}
+
+function trim(value: number): string {
+  return value.toFixed(1).replace(/\.0$/, "");
 }
 
 /** "1,234.56" | "$1234.5" | "1234" -> 123456. Returns null if unparseable. */
