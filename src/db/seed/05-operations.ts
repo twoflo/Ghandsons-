@@ -24,18 +24,23 @@ type EventSpec = {
 export async function seedOperations(ctx: Ctx) {
   const mon = mondayOffset();
 
+  /*
+   * Crews are kept apart on purpose, except for one deliberate clash next
+   * week (Tyler is on the roof and at TAFE) so the double-booking warning
+   * has something real to catch rather than crying wolf all over the grid.
+   */
   const events: EventSpec[] = [
     // last week
-    { job: "kilby_ext", title: "First floor framing", dayOffsetFromMonday: mon - 7, days: 5, crew: ["jake", "marco", "tyler"] },
+    { job: "kilby_ext", title: "First floor framing", dayOffsetFromMonday: mon - 7, days: 5, crew: ["jake", "tyler"] },
     { job: "cpg_u3", title: "Strip out and rough in", dayOffsetFromMonday: mon - 7, days: 3, crew: ["marco"] },
     // this week
-    { job: "kilby_ext", title: "Roof frame and battens", dayOffsetFromMonday: mon, days: 4, crew: ["jake", "marco", "tyler"] },
-    { job: "cpg_u3", title: "Waterproofing and tiling", dayOffsetFromMonday: mon + 1, days: 3, crew: ["marco", "tyler"], notes: "Tiler Dimi on site Wed-Thu. Don't walk on it Thursday." },
-    { job: "whitfield_ensuite", title: "Ensuite tile repair", dayOffsetFromMonday: mon + 3, days: 1, crew: ["marco"] },
+    { job: "kilby_ext", title: "Roof frame and battens", dayOffsetFromMonday: mon, days: 4, crew: ["jake", "tyler"] },
+    { job: "cpg_u3", title: "Waterproofing and tiling", dayOffsetFromMonday: mon + 1, days: 3, crew: ["marco"], notes: "Tiler Dimi on site Wed-Thu. Don't walk on it Thursday." },
+    { job: "whitfield_ensuite", title: "Ensuite tile repair", dayOffsetFromMonday: mon + 4, days: 1, crew: ["marco"] },
     { job: "kilby_ext", title: "Engineer inspection — portal beam", dayOffsetFromMonday: mon + 2, days: 1, crew: ["greg"], kind: "inspection" },
-    // next week — this is the double booking the schedule screen flags
+    // next week — the clash the schedule screen is meant to catch
     { job: "kilby_ext", title: "Roof sheeting", dayOffsetFromMonday: mon + 7, days: 3, crew: ["jake", "tyler"] },
-    { job: "cpg_u3", title: "Fit off and handover", dayOffsetFromMonday: mon + 8, days: 2, crew: ["marco", "tyler"], notes: "Tyler is double-booked Tuesday — sort it out." },
+    { job: "cpg_u3", title: "Fit off and handover", dayOffsetFromMonday: mon + 8, days: 2, crew: ["marco"] },
     { job: "dental_fitout", title: "Joinery delivery", dayOffsetFromMonday: mon + 12, days: 1, crew: ["greg"], kind: "delivery" },
     // the long weekend fitout
     { job: "dental_fitout", title: "Reception fitout — long weekend", dayOffsetFromMonday: mon + 18, days: 4, crew: ["greg", "jake", "marco"], notes: "5pm Friday start. Surgery opens 7am Tuesday no matter what." },
@@ -72,7 +77,7 @@ export async function seedOperations(ctx: Ctx) {
       startAt: atTime(mon + 8, 7, 0),
       endAt: atTime(mon + 9, 15, 30),
       allDay: true,
-      notes: "Booked in months ago.",
+      notes: "Booked in months ago. He's also down for the roof sheeting those days — one of them has to give.",
       colour: "#64748b",
       createdBy: ctx.users.donna,
     })
