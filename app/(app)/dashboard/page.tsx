@@ -190,7 +190,7 @@ async function OwnerDashboard({ role }: { role: string }) {
               value={formatMoney(money.paidLast30Cents)}
               sub="Payments received"
               tone="good"
-              href="/reports/cash"
+              href="/reports"
             />
             <StatTile
               label="Due in the next 7 days"

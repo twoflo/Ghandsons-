@@ -196,10 +196,12 @@ function UserBlock({ user }: { user: { fullName: string; role: Role; email: stri
           .slice(0, 2)
           .join("")}
       </div>
-      <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-semibold text-white">{user.fullName}</p>
+      <Link href="/account" className="min-w-0 flex-1">
+        <p className="truncate text-sm font-semibold text-white underline-offset-2 hover:underline">
+          {user.fullName}
+        </p>
         <p className="truncate text-xs text-ink-400">{ROLE_LABELS[user.role]}</p>
-      </div>
+      </Link>
       <form action="/api/logout" method="post">
         <button
           type="submit"
