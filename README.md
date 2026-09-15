@@ -16,9 +16,14 @@ You need Node 20 or newer and a Postgres 15+ database.
 ```bash
 npm install
 cp .env.example .env          # then edit DATABASE_URL and AUTH_SECRET
+docker compose up -d          # or point DATABASE_URL at your own Postgres
 npm run db:setup              # creates the tables, constraints, views and demo data
 npm run dev
 ```
+
+The default `DATABASE_URL` in `.env.example` matches the Postgres the compose
+file starts, so if you use it you only need to set `AUTH_SECRET`. If you have
+your own Postgres, skip the compose step and point `DATABASE_URL` at it.
 
 Open http://localhost:3000 and sign in.
 

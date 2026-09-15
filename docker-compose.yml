@@ -1,0 +1,23 @@
+# Postgres for local development. Everything else runs with `npm run dev`.
+#   docker compose up -d
+#   npm run db:setup
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ghandsons-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ghandsons
+    ports:
+      - "5432:5432"
+    volumes:
+      - ghandsons-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ghandsons"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  ghandsons-pgdata:
